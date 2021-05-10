@@ -3,11 +3,22 @@ import java.util.concurrent.Executors;
 
 public class RunnablePractice {
     /** Runnable Interface */
-    Runnable r = () -> {
+    Runnable r = new Runnable() {
+        public void run() {
+            int i = 0;
+            // Short hand for iteration over while loop
+            while (i++ < 10) {
+                System.out.println("it works!");
+            }
+        }
+    };
+
+    /** With Lambda */
+    Runnable rl = () -> {
         int i = 0;
         // Short hand for iteration over while loop
         while (i++ < 10)
-            System.out.println("it works!");
+            System.out.println("Lambda time #" + i);
     };
 }
 
@@ -21,5 +32,10 @@ class RunnableDriver {
         es.execute(s.r);
         // shut down the service
         es.shutdown();
+
+        ExecutorService es2 = Executors.newSingleThreadExecutor();
+        // execute w/ lambda, shutdown again
+        es2.execute(s.rl);
+        es2.shutdown();
     }
 }

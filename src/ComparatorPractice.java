@@ -17,6 +17,7 @@ public class ComparatorPractice {
         }
     };
 
+    /** With Lambda */
     Comparator<String> comparatorNew =
             (String s1, String s2) ->
                     Integer.compare(s1.length(), s2.length());
@@ -42,10 +43,17 @@ class ComparatorDriver {
         // Pass in comparator, comparator.compare(o1, o2) will be used to organize strings from from least to greatest
         // Sorts the arr, no need to return to another arr
         Arrays.sort(arr, s.comparatorOld);
-
-        System.out.println("Array Sort result:");
+        System.out.println("Array Sort result (w/o lambda):");
 
         // Create stream from array, then, for each, print it out on a new line
         Arrays.stream(arr).forEach(System.out::println);
+
+        // With comparator that uses lambda:
+        String[] arrTwo = new String[]{"123", "4567", "1", "00000", "02"};
+        Arrays.sort(arrTwo, s.comparatorNew);
+        System.out.println("\nArray Sort result (w/ lambda):");
+
+        // Create stream from array, then, for each, print it out on a new line
+        Arrays.stream(arrTwo).forEach(System.out::println);
     }
 }
